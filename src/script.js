@@ -37,7 +37,16 @@ var container = $("#network")[0];
 
 // Define options for network visualization
 var options = {
-      nodes: {
+	layout: {
+            hierarchical: {
+                  enabled: true,
+                  direction: 'LR', 
+                  sortMethod: 'directed',
+                  nodeSpacing: 150,
+                  levelSeparation: 100
+            }
+      	},
+	nodes: {
             shape: 'circle',
             size: 60,
             font: {
