@@ -72,12 +72,7 @@ var options = {
             width: 2,
             shadow: true,
       },
-      physics: {
-           	stabilization: true,
-		avoidOverlap: 1, 
-	      damping: 0.5,
-	      
-      }
+
 };
 
 
