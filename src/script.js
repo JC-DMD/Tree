@@ -39,18 +39,29 @@ var container = $("#network")[0];
 var options = {
       nodes: {
             shape: 'dot',
-            size: 30,
+            size: 60,
             font: {
-                  size: 16
+                  size: 10,
+                  color: '#ffffff',
+                  vadjust: 0
             },
             borderWidth: 2,
-            shadow: true
+            shadow: true,
+            margin: 5,
+            widthConstraint: {
+                  minimum: 50,
+                  maximum: 100
+            }
       },
       edges: {
             width: 2,
             shadow: true
+      },
+      physics: {
+            stabilization: false
       }
 };
+
 
 // Node group (color)
 const color_nodes = function() {
