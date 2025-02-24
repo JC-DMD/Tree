@@ -58,7 +58,7 @@ var options = {
             shadow: true
       },
       physics: {
-            stabilization: false
+            stabilization: true
       }
 };
 
