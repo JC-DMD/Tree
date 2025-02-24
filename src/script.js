@@ -38,6 +38,7 @@ var container = $("#network")[0];
 // Define options for network visualization
 var options = {
 	layout: {
+	improvedLayout: true,
             hierarchical: {
                   enabled: true,
                   direction: 'LR', 
