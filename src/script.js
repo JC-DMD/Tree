@@ -38,7 +38,7 @@ var container = $("#network")[0];
 // Define options for network visualization
 var options = {
       nodes: {
-            shape: 'dot',
+            shape: 'circle',
             size: 60,
             font: {
                   size: 10,
