@@ -42,8 +42,8 @@ var options = {
                   enabled: true,
                   direction: 'LR', 
                   sortMethod: 'directed',
-                  nodeSpacing: 150,
-                  levelSeparation: 100
+                  nodeSpacing: 250,
+                  levelSeparation: 400
             }
       	},
 	nodes: {
