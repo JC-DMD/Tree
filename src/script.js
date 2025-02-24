@@ -47,8 +47,7 @@ var options = {
             }
       	},
 	nodes: {
-            shape: 'circle',
-            size: 60,
+            shape: 'box',
             font: {
                   size: 10,
                   color: '#000000',
@@ -57,11 +56,12 @@ var options = {
 		    strokeWidth: 1
             },
             borderWidth: 2,
+	    borderradius: 6, 
             shadow: true,
             margin: 5,
             widthConstraint: {
                   minimum: 50,
-                  maximum: 100
+                  maximum: 150
             }
       },
       edges: {
