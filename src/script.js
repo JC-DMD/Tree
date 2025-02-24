@@ -49,6 +49,7 @@ var options = {
       	},
 	nodes: {
             shape: 'box',
+		fixed: true,
             font: {
                   size: 10,
                   color: '#000000',
