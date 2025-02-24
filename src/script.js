@@ -51,8 +51,10 @@ var options = {
             size: 60,
             font: {
                   size: 10,
-                  color: '#ffffff',
-                  vadjust: 0
+                  color: '#000000',
+                  vadjust: 0,
+		    strokeColor: '#ffffff',
+		    strokeWidth: 1
             },
             borderWidth: 2,
             shadow: true,
@@ -64,10 +66,13 @@ var options = {
       },
       edges: {
             width: 2,
-            shadow: true
+            shadow: true,
       },
       physics: {
-            stabilization: true
+           	stabilization: true,
+		avoidOverlap: 1, 
+	      damping: 0.5,
+	      
       }
 };
 
