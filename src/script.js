@@ -13,54 +13,52 @@ var data = {
 
 // Remove file name from file path and return just the directory that file (or folder) resides in
 const directory = function(input) {
-      // Split input into name of each directory and the file name
+      // Splits on backslashes, removes the last element, then rejoins
       input = input.split("\\");
-	  input.pop();
-	  
-      // return output. this line is pretty self-explanatory
+      input.pop();
       return input.join("\\");
-}
+};
 
-// Get number of sub-directories within file path
+// Returns the number of sub-directories within a file path
 const subfolders = function(input) {
       return input.split("\\").length;
-}
+};
 
-// Get default file paths from dir.txt
+// Gets default file paths from dir.txt
 var dir = $.ajax({
       url: "./dir.txt",
       async: false
 }).responseText;
 
-// Get div where network will be displayed
+// Gets the div where the network will be displayed
 var container = $("#network")[0];
 
-// Define options for network visualization
+// Defines options for network visualization
 var options = {
-	layout: {
-	improvedLayout: true,
+      layout: {
+            improvedLayout: true,
             hierarchical: {
                   enabled: true,
-                  direction: 'LR', 
+                  direction: 'LR',
                   sortMethod: 'directed',
                   nodeSpacing: 50,
                   levelSeparation: 400
             }
-      	},
-	nodes: {
+      },
+      nodes: {
             shape: 'box',
-		fixed: true,
+            fixed: true,
             font: {
                   size: 10,
                   color: '#000000',
                   vadjust: 0,
-		    strokeColor: '#ffffff',
-		    strokeWidth: 1
+                  strokeColor: '#ffffff',
+                  strokeWidth: 1
             },
             borderWidth: 2,
-	    shapeproperties: {
-		    borderRadius: 6
-	    },
+            shapeproperties: {
+                  borderRadius: 6
+            },
             shadow: true,
             margin: 5,
             widthConstraint: {
@@ -70,11 +68,9 @@ var options = {
       },
       edges: {
             width: 2,
-            shadow: true,
-      },
-
+            shadow: true
+      }
 };
-
 
 // Node group (color)
 const color_nodes = function() {
@@ -82,49 +78,49 @@ const color_nodes = function() {
     var file_types = [];
 
     for (var i = 0; i < Object.keys(data.nodes._data).length; i++) {
-        // Split file path into individual folders and files
+        // Splits this input line on backslashes to get parts of the path
         var split = input[i].split("\\");
-        // Get filename from file path
+        // Takes the last part, which is typically the filename
         var name = split[split.length - 1];
-
-        // We'll also store the full line (like "C:\Example\FolderA True")
+        // Stores the full line for checking the final two characters
         var line = input[i];
 
         if (color == "Object type") {
-            // Check if this is the appended root node
+            // Checks if this is the appended root node
             if (i == input.length - 1 && root) {
-                group = 3; // Root
+                group = 3; // Assigns a special group for the root
             } else {
-                // Grab the last 5 characters
-                // "False" => file, " True" => folder (with a leading space)
-                var lastFive = line.slice(-5);
-
-                if (lastFive === "False") {
-                    // It's a file
-                    group = 1;
-                } else if (lastFive === " True") {
-                    // It's a folder
+                // Looks at the last two characters to see if it's ?C or ?I
+                var lastTwo = line.slice(-2);
+                if (lastTwo === "?C") {
+                    // Assigns group 2 to folders
                     group = 2;
+                } else if (lastTwo === "?I") {
+                    // Assigns group 1 to files
+                    group = 1;
                 } else {
-                    // Fallback if it doesn't match either pattern
+                    // Assigns a fallback group if not recognized
                     group = -1;
                 }
             }
-        } 
-        else if (color == "File level") {
+        } else if (color == "File level") {
             group = subfolders(input[i]);
-        } 
-        else if (color == "File type") {
-            // We'll keep the existing logic here. 
-            // If you need to ALSO ignore folders in "File type," 
-            // you can do another last-5-chars check before deciding extension.
-            if (name.includes(".")) {
-                var file_type = name.split(".")[1];
-                if (!file_types.includes(file_type)) {
-                    file_types.push(file_type);
+        } else if (color == "File type") {
+            // Checks the last two characters to confirm file vs folder
+            var lastTwoType = line.slice(-2);
+            if (lastTwoType === "?I") {
+                // Assigns a group based on the file's extension
+                if (name.includes(".")) {
+                    var file_type = name.split(".")[1];
+                    if (!file_types.includes(file_type)) {
+                        file_types.push(file_type);
+                    }
+                    group = file_types.indexOf(file_type);
+                } else {
+                    group = -1;
                 }
-                group = file_types.indexOf(file_type);
             } else {
+                // Folders or unrecognized items get -1
                 group = -1;
             }
         }
@@ -134,57 +130,45 @@ const color_nodes = function() {
             group: group
         });
     }
-}
+};
 
 // Minimum number of nested directories in all file paths
 var min_subfolders;
-// Generate network visualization based on input data
+// Generates the network visualization based on input data
 const update = function() {
-      // ID of current node
+      // Resets ID counter
       var id = 0;
 
-      // Create datasets for nodes and edges
+      // Resets the node and edge datasets
       data.nodes = new vis.DataSet();
       data.edges = new vis.DataSet();
 
-      // Get input text from textarea
+      // Gets input text from the textarea
       input = $("#input")[0].value;
-      // If no input is provided, use default
       if (input == undefined || input == "") {
             input = dir;
       }
-      // Split input string into array of lines
       input = input.split("\n");
-      // Remove empty lines from input
       input = input.filter(Boolean);
 
-      // Find shortest file path
-      // Start with first file path
+      // Finds the shortest file path
       min_subfolders = input[0];
-      // Loop through all file paths
       for (var i = 0; i < input.length; i++) {
-            // Compare current shortest directory to current file path
-            // If file path has fewer subfolders than min_subfolders, update min_subfolders
             if (subfolders(input[i]) < subfolders(min_subfolders)) {
                   min_subfolders = input[i];
             }
       }
       var root_dir = directory(min_subfolders);
       if (root) {
-            // Add root directory to list of file paths
             input.push(root_dir);
       }
       $("#root-switch-tooltip").text(root_dir);
 
-      // Add nodes to represent files and folders
-      // Loop through all file paths
+      // Adds nodes to represent files and folders
       for (var i = 0; i < input.length; i++) {
-            // Split file path into individual folders and files
             var split = input[i].split("\\");
-            // Get filename from file path
             var name = split[split.length - 1];
 
-            // Add node to network
             data.nodes.add({
                   id: id,
                   label: name,
@@ -195,30 +179,21 @@ const update = function() {
       }
       color_nodes();
 
-      // Add connections/edges to network
+      // Adds connections/edges
       for (var i = 0; i < input.length; i++) {
-            // Loop through all existing nodes
             for (var j = 0; j < Object.keys(data.nodes._data).length; j++) {
-                  // Check if directory of current node matches the full path of any other nodes
                   if (directory(input[i]) == data.nodes._data[j].path) {
-                        // If the node belongs to the current directory, add a connection between the two nodes
                         data.edges.add({
                               from: j,
                               to: i
                         });
-
-                        //nodes.update({
-                        //id: i,
-                        //group: group
-                        //});
-                        //group++;
                   }
             }
       }
 
-      // Display network
+      // Displays the network
       network = new vis.Network(container, data, options);
-}
+};
 
 var color = "File level";
 const uc = function() {
@@ -250,7 +225,7 @@ $("#root-switch").click(() => {
       update();
 });
 
-// Update network when program is started
+// Updates the network when the program is started
 update();
 
 $("#load-button").click(update);
