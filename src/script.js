@@ -15,8 +15,7 @@ var data = {
 const directory = function(input) {
       // Split input into name of each directory and the file name
       input = input.split("\\");
-	  input.pop();
-	  
+      input.pop();
       // return output. this line is pretty self-explanatory
       return input.join("\\");
 }
@@ -24,6 +23,31 @@ const directory = function(input) {
 // Get number of sub-directories within file path
 const subfolders = function(input) {
       return input.split("\\").length;
+}
+
+// Helper function to remove ?C or ?I at the end of a path string
+function stripSuffix(path) {
+      return path.replace(/\?C$|\?I$/, "");
+}
+
+// Helper function to check if path ends with ?C (folder) or ?I (file)
+function parseType(path) {
+      if (path.endsWith("?C")) {
+            return "folder";
+      } else if (path.endsWith("?I")) {
+            return "file";
+      }
+      return "unknown";
+}
+
+// Helper function to parse extension from a file name
+// Even if there are multiple periods, it will take everything after the *last* period
+function parseExtension(name) {
+      var parts = name.split(".");
+      if (parts.length > 1) {
+            return parts[parts.length - 1].toLowerCase();
+      }
+      return "";
 }
 
 // Get default file paths from dir.txt
@@ -79,41 +103,48 @@ const color_nodes = function() {
       var group = 0;
       var file_types = [];
 
+      // Loop through each node in the data set
       for (var i = 0; i < Object.keys(data.nodes._data).length; i++) {
-            // Split file path into individual folders and files
-            var split = input[i].split("\\");
-            // Get filename from file path
-            var name = split[split.length - 1];
+            // Retrieve the node
+            var node = data.nodes._data[i];
 
             if (color == "Object type") {
                   // Root node should be one color . . .
                   if (i == input.length - 1 && root) {
                         group = 3;
                   }
-                  // Directories (folders) should be another . . .
-                  else if (name.includes(".")) {
+                  // If it's a file, color = 1
+                  else if (node.itemType === "file") {
                         group = 1;
                   }
-                  // And files should be another
-                  else {
+                  // If it's a folder, color = 2
+                  else if (node.itemType === "folder") {
                         group = 2;
                   }
-            } else if (color == "File level") {
-                  group = subfolders(input[i]);
-            } else if (color == "File type") {
-                  if (name.includes(".")) {
-                        var file_type = name.split(".")[1];
-                        if (!file_types.includes(file_type)) {
-                              file_types.push(file_type);
+                  // Otherwise unknown
+                  else {
+                        group = -1;
+                  }
+            }
+            else if (color == "File level") {
+                  group = subfolders(node.path);
+            }
+            else if (color == "File type") {
+                  // Only apply coloring if it's a file
+                  if (node.itemType === "file") {
+                        var ext = node.extension;
+                        // Keep track of unique extensions
+                        if (!file_types.includes(ext)) {
+                              file_types.push(ext);
                         }
-                        group = file_types.indexOf(file_type);
+                        group = file_types.indexOf(ext);
                   } else {
                         group = -1;
                   }
             }
 
             data.nodes.update({
-                  id: i,
+                  id: node.id,
                   group: group
             });
       }
@@ -152,7 +183,7 @@ const update = function() {
                   min_subfolders = input[i];
             }
       }
-      var root_dir = directory(min_subfolders);
+      var root_dir = directory(stripSuffix(min_subfolders));
       if (root) {
             // Add root directory to list of file paths
             input.push(root_dir);
@@ -162,39 +193,47 @@ const update = function() {
       // Add nodes to represent files and folders
       // Loop through all file paths
       for (var i = 0; i < input.length; i++) {
+            // Strip ?C or ?I suffix so parent paths match
+            var cleanedPath = stripSuffix(input[i]);
+            // Determine file vs folder vs unknown
+            var type = parseType(input[i]);
+
             // Split file path into individual folders and files
-            var split = input[i].split("\\");
-            // Get filename from file path
+            var split = cleanedPath.split("\\");
+            // Get filename (no ?C or ?I)
             var name = split[split.length - 1];
+
+            // Build extension if it's a file
+            var ext = "";
+            if (type === "file") {
+                  ext = parseExtension(name);
+            }
 
             // Add node to network
             data.nodes.add({
                   id: id,
-                  label: name,
-                  path: input[i]
+                  label: name,       // Clean label without ?C or ?I
+                  path: cleanedPath, // Full path without suffix
+                  itemType: type,    // "file", "folder", or "unknown"
+                  extension: ext
             });
 
             id++;
       }
+
       color_nodes();
 
       // Add connections/edges to network
       for (var i = 0; i < input.length; i++) {
-            // Loop through all existing nodes
             for (var j = 0; j < Object.keys(data.nodes._data).length; j++) {
                   // Check if directory of current node matches the full path of any other nodes
-                  if (directory(input[i]) == data.nodes._data[j].path) {
+                  // Use stripped path for matching
+                  if (directory(stripSuffix(input[i])) == data.nodes._data[j].path) {
                         // If the node belongs to the current directory, add a connection between the two nodes
                         data.edges.add({
                               from: j,
                               to: i
                         });
-
-                        //nodes.update({
-                        //id: i,
-                        //group: group
-                        //});
-                        //group++;
                   }
             }
       }
