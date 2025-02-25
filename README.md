@@ -1,5 +1,5 @@
 # Tree
-*This visualizer is essentially an editted version of a previous github user's work, but has been editted to suit specific needs. *
+*This visualizer is essentially an editted version of a previous github user's work, but has been editted to suit specific needs.*
 `Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName) %T"} else {"$($_.FullName) %F"}} > output.txt`
 
 A simple visualizer for file directory tree structures, especially in Windows. Files and folders are visualized as a network, with files and the directories they belong to connected. This can be useful for quickly seeing the structure of all a project's files.
