@@ -1,5 +1,5 @@
 # Tree
-*This visualizer is essentially an editted version of a [another github user's work](https://github.com/generic-github-user/Tree), [generic-github-user](https://github.com/generic-github-user), but has been editted to suit specific needs.*
+*This visualizer is essentially an editted version of [Tree](https://github.com/generic-github-user/Tree), a project by [generic-github-user](https://github.com/generic-github-user), but has been editted to suit specific needs.*
 
 `Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName) %T"} else {"$($_.FullName) %F"}} > output.txt`
 
