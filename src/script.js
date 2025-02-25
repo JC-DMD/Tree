@@ -78,47 +78,56 @@ var options = {
 
 // Node group (color)
 const color_nodes = function() {
-      var group = 0;
-      var file_types = [];
+    var group = 0;
+    var file_types = [];
 
-      for (var i = 0; i < Object.keys(data.nodes._data).length; i++) {
-            // Split file path into individual folders and files
-            var split = input[i].split("\\");
-            // Get filename from file path
-            var name = split[split.length - 1];
+    for (var i = 0; i < Object.keys(data.nodes._data).length; i++) {
+        // Split file path into individual folders and files
+        var split = input[i].split("\\");
+        // Get filename from file path
+        var name = split[split.length - 1];
+        
+        // Grab the full line (which ends with "True" or "False")
+        var line = input[i].trim();
+        // Split on whitespace to get the last token (True or False)
+        var tokens = line.split(" ");
+        var isContainer = tokens[tokens.length - 1]; // "True" or "False"
 
-            if (color == "Object type") {
-                  // Root node should be one color . . .
-                  if (i == input.length - 1 && root) {
-                        group = 3;
-                  }
-                  // Directories (folders) should be another . . .
-                  else if (name.includes(".")) {
-                        group = 1;
-                  }
-                  // And files should be another
-                  else {
-                        group = 2;
-                  }
-            } else if (color == "File level") {
-                  group = subfolders(input[i]);
-            } else if (color == "File type") {
-                  if (name.includes(".")) {
-                        var file_type = name.split(".")[1];
-                        if (!file_types.includes(file_type)) {
-                              file_types.push(file_type);
-                        }
-                        group = file_types.indexOf(file_type);
-                  } else {
-                        group = -1;
-                  }
+        if (color == "Object type") {
+            // Root node color, if you’re adding a single root line to input
+            if (i == input.length - 1 && root) {
+                group = 3;
+            } else {
+                if (isContainer === "True") {
+                    // It’s a folder/directory
+                    group = 2;
+                } else {
+                    // It’s a file
+                    group = 1;
+                }
             }
+        } else if (color == "File level") {
+            group = subfolders(input[i]);
+        } else if (color == "File type") {
+            // Check that the name has a dot AND it's a file (False)
+            if (name.includes(".") && isContainer === "False") {
+                var file_type = name.split(".")[1];
+                if (!file_types.includes(file_type)) {
+                    file_types.push(file_type);
+                }
+                group = file_types.indexOf(file_type);
+            } else {
+                // Either it's a folder or no dot in the name => group = -1
+                group = -1;
+            }
+        }
 
-            data.nodes.update({
-                  id: i,
-                  group: group
-            });
-      }
+        // Update the node's group in the dataset
+        data.nodes.update({
+            id: i,
+            group: group
+        });
+    }
 }
 
 // Minimum number of nested directories in all file paths
