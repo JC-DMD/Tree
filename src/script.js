@@ -94,11 +94,11 @@ var options = {
       },
       edges: {
             width: 2,
-          smooth: {
-            type: 'cubicBezier',
-            forceDirection: 'none',
-            roundness: 1
-          }
+        //  smooth: {
+        //    type: 'cubicBezier',
+        //    forceDirection: 'none',
+        //    roundness: 1
+        //  }
       },
 }
 
