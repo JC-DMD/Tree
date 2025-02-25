@@ -1,7 +1,9 @@
 <!-- Based on example code at http://visjs.org/examples/network/nodeStyles/shadows.html -->
 
 <!DOCTYPE html>
+
 <html>
+
 <head>
       <title>Tree</title>
 
@@ -12,11 +14,13 @@
 </head>
 
 <body>
-      <!-- Replace the text area input with a file input -->
-      <div id="input-container">
-            <input type="file" id="file-input" accept=".txt,.csv" />
+      <div class="mdl-textfield mdl-js-textfield" id="input-container">
+            <textarea class="mdl-textfield__input" type="text" rows="5" id="input" spellcheck="false"></textarea>
+            <label class="mdl-textfield__label" for="input">Enter file directory data</label>
       </div>
-
+      <!-- <div class="mdl-tooltip" data-mdl-for="input" id="input-tooltip">
+            Enter file directory data
+      </div> -->
       <div id="settings">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="load-button">
                   Load
@@ -52,4 +56,5 @@
       <script defer src="./mdl/material.min.js"></script>
       <script type="text/javascript" src="./script.js"></script>
 </body>
+
 </html>
