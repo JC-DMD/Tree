@@ -82,7 +82,9 @@ var options = {
                   strokeWidth: 1
             },
             borderWidth: 2,
-            borderRadius: 6,
+            shapeProperties: {
+                  borderRadius: 6
+            },
             shadow: true,
             margin: 5,
             widthConstraint: {
