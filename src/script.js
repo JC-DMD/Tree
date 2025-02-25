@@ -86,43 +86,49 @@ const color_nodes = function() {
         var split = input[i].split("\\");
         // Get filename from file path
         var name = split[split.length - 1];
-        
-        // Grab the full line (which ends with "True" or "False")
-        var line = input[i].trim();
-        // Split on whitespace to get the last token (True or False)
-        var tokens = line.split(" ");
-        var isContainer = tokens[tokens.length - 1]; // "True" or "False"
+
+        // We'll also store the full line (like "C:\Example\FolderA True")
+        var line = input[i];
 
         if (color == "Object type") {
-            // Root node color, if you’re adding a single root line to input
+            // Check if this is the appended root node
             if (i == input.length - 1 && root) {
-                group = 3;
+                group = 3; // Root
             } else {
-                if (isContainer === "True") {
-                    // It’s a folder/directory
+                // Grab the last 5 characters
+                // "False" => file, " True" => folder (with a leading space)
+                var lastFive = line.slice(-5);
+
+                if (lastFive === "False") {
+                    // It's a file
+                    group = 1;
+                } else if (lastFive === " True") {
+                    // It's a folder
                     group = 2;
                 } else {
-                    // It’s a file
-                    group = 1;
+                    // Fallback if it doesn't match either pattern
+                    group = -1;
                 }
             }
-        } else if (color == "File level") {
+        } 
+        else if (color == "File level") {
             group = subfolders(input[i]);
-        } else if (color == "File type") {
-            // Check that the name has a dot AND it's a file (False)
-            if (name.includes(".") && isContainer === "False") {
+        } 
+        else if (color == "File type") {
+            // We'll keep the existing logic here. 
+            // If you need to ALSO ignore folders in "File type," 
+            // you can do another last-5-chars check before deciding extension.
+            if (name.includes(".")) {
                 var file_type = name.split(".")[1];
                 if (!file_types.includes(file_type)) {
                     file_types.push(file_type);
                 }
                 group = file_types.indexOf(file_type);
             } else {
-                // Either it's a folder or no dot in the name => group = -1
                 group = -1;
             }
         }
 
-        // Update the node's group in the dataset
         data.nodes.update({
             id: i,
             group: group
