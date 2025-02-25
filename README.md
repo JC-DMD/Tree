@@ -1,25 +1,25 @@
 # Tree
+*This visualizer is essentially an editted version of a previous github user's work, but has been editted to suit specific needs. *
+`Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName) %T"} else {"$($_.FullName) %F"}} > output.txt`
 
-`Get-ChildItem -Path . -Recurse | Select-Object FullName, PsIsContainer | Export-Csv -Path .\output.csv -NoTypeInformation`
-
-A simple visualizer for file directory tree structures, especially in Windows. Files and folders are visualized as a network, with files and the directories they belong to connected. This can be useful for quickly seeing the structure of all a project's files or just creating a visualization for fun.
+A simple visualizer for file directory tree structures, especially in Windows. Files and folders are visualized as a network, with files and the directories they belong to connected. This can be useful for quickly seeing the structure of all a project's files.
 
 ![Example file visualization](./3.PNG)
 *Visualization of the [`samples`](https://github.com/chartjs/Chart.js/tree/master/samples) directory of the [Chart.js](https://www.chartjs.org/) library*
 
 # Usage
 
-A demo of the program is available here: https://generic-github-user.github.io/Tree/src/. Before using the program, you will need to create a list of files in your chosen directory. Below are instructions to do so - they should remain fairly relevant, as the command line has not changed much in the last 20 years. For more information, see [this question](https://stackoverflow.com/questions/15214486/command-to-list-all-files-in-a-folder-as-well-as-sub-folders-in-windows) on StackOverflow.
+A demo of the program is available here: https://generic-github-user.github.io/Tree/src/. Before using the program, you will need to create a list of files in your chosen directory. Below are instructions to do so.
 
 ## Generating a list of files
 
-First, open up the command prompt. On Windows, just press the Windows button in the lower left-hand corner of the screen and search for "cmd".
+First, open up Windows PowerShell. On Windows, just press the Windows button in the lower left-hand corner of the screen and search for "PowerShell".
 
 Next, navigate to the directory you want to visualize with `cd C:\Your\Directory\Path`.
 
-Once you're in the correct directory, enter `dir /s/b > dir.txt`. This will create a list of only the file paths of each file in the directory and files in the directory's subfolders, then alphabetize it and save it to a text file called `dir.txt`.
+Once you're in the correct directory, enter `Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName) %T"} else {"$($_.FullName) %F"}} > output.txt`. This will create a list the all the files and folders save it to a text file called `output.txt` in the directory you are visualizing.
 
-You can close the command prompt now. Navigate to the directory in Windows Explorer or a similar program and open the text file.
+You can close the PowerShell now. Navigate to the directory in Windows Explorer or a similar program and open the text file.
 
 Use `CTRL + A` to select all of the text inside the document, then `CTRL + C` to copy it to your clipboard.
 
