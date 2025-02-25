@@ -1,6 +1,6 @@
 # Tree
 
-`Get-ChildItem -Path . -Recurse | Select-Object FullName, PsIsContainer`
+`Get-ChildItem -Path . -Recurse | Select-Object FullName, PsIsContainer | Export-Csv -Path .\output.csv -NoTypeInformation`
 
 A simple visualizer for file directory tree structures, especially in Windows. Files and folders are visualized as a network, with files and the directories they belong to connected. This can be useful for quickly seeing the structure of all a project's files or just creating a visualization for fun.
 
