@@ -72,7 +72,7 @@ var options = {
             width: 2,
             shadow: true
       },
-};
+}
 
 // Node group (color)
 const color_nodes = function() {
