@@ -94,7 +94,11 @@ var options = {
       },
       edges: {
             width: 2,
-            shadow: true
+            smooth: 
+            {   enabled: true,
+                type: 'discrete',
+                roundness: 0
+            }
       },
 }
 
