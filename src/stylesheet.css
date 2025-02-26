@@ -41,7 +41,7 @@ body {
 
 #settings:hover {
       opacity: 1;
-      width: 20vw;
+      /*width: 20vw;*/
       transition: all 1s ease;
 }
 
