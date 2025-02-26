@@ -8,51 +8,35 @@
       <title>Tree</title>
 
       <link href="./vis/vis.min.css" rel="stylesheet" type="text/css" />
-      <!--<link rel="stylesheet" href="./mdl/icon.css" />
-      <link rel="stylesheet" href="./mdl/material.min.css" />-->
       <link href="./stylesheet.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <div id="settings">
-     
-            <textarea class="mdl-textfield__input" type="text" rows="5" id="input" spellcheck="false"></textarea>
-            <label class="mdl-textfield__label" for="input">Enter file directory data</label>
-      
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="load-button">
-                  Load
-            </button>
-
-            <div id="node-color">
-                  <p id="node-color-header">Color nodes by:</p>
-                  <br />
-                  <button id="color-dropdown" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-button--accent">
-                        <i class="material-icons">arrow_drop_down</i>
-                  </button>
-                  <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect" for="color-dropdown">
-                        <li class="mdl-menu__item" id="color-object-type">Object type</li>
-                        <li class="mdl-menu__item" id="color-file-level">File level</li>
-                        <li class="mdl-menu__item" id="color-file-type">File type</li>
-                  </ul>
-                  <p id="color-indicator"></p>
-            </div>
-
-            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="root-switch" id="root-switch-container">
-                  <input type="checkbox" id="root-switch" class="mdl-switch__input" checked>
-                  <span class="mdl-switch__label">Show root</span>
-            </label>
-            <div class="mdl-tooltip" data-mdl-for="root-switch-container" id="root-switch-tooltip">
-                  Show root directory
-            </div>
-            <a href="https://jc-dmd.github.io/Tree/" target="_blank">Return to Instructions</a>
-      </div>
-  
-      <div id="network"></div>
-
-      <script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
-      <script type="text/javascript" src="./vis/vis.min.js"></script>
-   <!--   <script defer src="./mdl/material.min.js"></script>-->
-      <script type="text/javascript" src="./script.js"></script>
+		<textarea type="text" rows="5" id="input" spellcheck="false"placeholder="Enter File Directory Data"></textarea>  
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="load-button">
+			  Load Tree
+		</button>
+		<div id="node-color">
+			<p id="node-color-header">Color nodes by:</p>
+			<select name="cars" id="color-dropdown">
+				<option id="color-file-level">File level</option>
+				<option id="color-object-type">Object type</option>
+				<option id="color-file-type">File type</option>
+			</select>
+			<p id="color-indicator"></p>
+		</div>
+		<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="root-switch" id="root-switch-container">
+			<br>
+			<input type="checkbox" id="root-switch" class="mdl-switch__input" checked>
+			<span class="mdl-switch__label">Show Root</span>
+		</label>
+		<a href="https://jc-dmd.github.io/Tree/" target="_blank">Return to Instructions</a>
+	</div>
+	<div id="network"></div>
+	<script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./vis/vis.min.js"></script>
+	<script type="text/javascript" src="./script.js"></script>
 </body>
 
 </html>
