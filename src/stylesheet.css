@@ -9,45 +9,31 @@ body {
       margin: 0;
       padding: 0;
 }
-
-#input-container {
-      margin-left: 1.5vw;
-      position: absolute;
-      width: 10vw;
-      z-index: 1;
-      transition: all 1s ease;
+textarea {
+  width: 100%;
 }
 
-/* #input-container:hover {
-      width: calc(100vw - (1.5vw * 2));
-      transition: all 1s ease;
-} */
-
-/* #input-tooltip {
-      position: absolute !important;
-      top: 100px;
-      left: 1.5vw;
-} */
-
 #settings {
-      position: absolute;
+      float: left;
+      width: 15%;
+      height: 100vh;
       opacity: 0.8;
-      width: 10vw;
-      left: 1.5vw;
-      top: 150px;
       z-index: 1;
       transition: all 1s ease;
+      padding: 1em;
+      background-color: lightgrey;
+      border: outset;
 }
 
 #settings:hover {
       opacity: 1;
       /*width: 20vw;*/
-      transition: all 1s ease;
+      transition: all 0.5s ease;
 }
 
 #settings>* {
       width: 100%;
-      margin-bottom: 15px;
+
 }
 
 #node-color * {
@@ -70,7 +56,6 @@ body {
 }
 
 #network {
-      position: absolute;
       width: 100vw;
       height: 100vh;
       margin: 0;
