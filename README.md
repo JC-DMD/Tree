@@ -29,6 +29,7 @@ Once you have the list of file paths, just paste it (`CTRL + V`) into the text b
 ## Settings
 
 A number of settings are available to help customize the colors and nodes in the visualization.
+### Node Color
 
 #### File Level
 
