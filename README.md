@@ -5,7 +5,7 @@
 > #### [Continue to Tree](https://jc-dmd.github.io/Tree/src/)
 
 A simple visualizer for file directory tree structures. Files and folders are visualized as a network, with files and the directories they belong to connected. This can be useful for quickly seeing the structure of all a project's files.
-
+![Example file visualization](./assets/1.PNG)
 ![Example file visualization](./3.PNG)
 
 # Usage
