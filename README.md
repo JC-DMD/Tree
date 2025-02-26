@@ -1,7 +1,7 @@
 # Tree
-*This visualizer is essentially a heavily personalized version of [Tree](https://github.com/generic-github-user/Tree), a project by [generic-github-user](https://github.com/generic-github-user).*
-
-`Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName)?C"} else {"$($_.FullName)?I"}} > output.txt`
+*This project is essentially a heavily personalized version of [Tree](https://github.com/generic-github-user/Tree), a project by [generic-github-user](https://github.com/generic-github-user).*
+[Continue to **Tree**](https://jc-dmd.github.io/Tree/src/)
+Powershell Code: `Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName)?C"} else {"$($_.FullName)?I"}} > output.txt`
 
 A simple visualizer for file directory tree structures. Files and folders are visualized as a network, with files and the directories they belong to connected. This can be useful for quickly seeing the structure of all a project's files.
 
