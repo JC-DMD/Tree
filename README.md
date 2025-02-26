@@ -1,6 +1,6 @@
 # Tree
 > *This project is essentially a heavily personalized version of [Tree](https://github.com/generic-github-user/Tree), a project by [generic-github-user](https://github.com/generic-github-user).*
-> > [**Continue to Tree**](https://jc-dmd.github.io/Tree/src/)
+> [**Continue to Tree**](https://jc-dmd.github.io/Tree/src/)
 > #### Powershell Code:
 > ```Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName)?C"} else {"$($_.FullName)?I"}} > output.txt```
 
