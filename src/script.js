@@ -76,9 +76,9 @@ var options = {
             fixed: true,
             font: {
                   size: 10,
-                  color: '#000000',
+                  color: '#FFFFFF',
                   vadjust: 0,
-                  strokeColor: '#ffffff',
+                  strokeColor: '#000000',
                   strokeWidth: 1
             },
             borderWidth: 2,
