@@ -31,16 +31,13 @@ Once you have the list of file paths, just paste it (`CTRL + V`) into the text b
 A number of settings are available to help customize the colors and nodes in the visualization.
 ### Node Color
 
-#### File Level
-
+- #### File Level
 By default, nodes are colored by the level at which they fall within the file tree. Level 1 (root) is one color, level 2 (subfolders of root) are another color, etc.
 
-#### Object Type
-
+- #### Object Type
 Alternatively, nodes nodes can be colored by what type of digital object they are. The root node (if it is shown) is one color, folders (sub-directories) are another color, and individual files are a different color.
 
-#### File Type
-
+- #### File Type
 Nodes are colored based on their file extension; every different extension corresponds to a different node color. Folders are colored differently from all files.
 
 ### Show/hide root node
