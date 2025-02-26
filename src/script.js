@@ -251,24 +251,10 @@ const uc = function() {
       $("#color-indicator").text(color);
       color_nodes();
 };
-$("#color-object-type").click(
-      () => {
-            color = "Object type";
-            uc();
-      }
-);
-$("#color-file-level").click(
-      () => {
-            color = "File level";
-            uc();
-      }
-);
-$("#color-file-type").click(
-      () => {
-            color = "File type";
-            uc();
-      }
-);
+document.getElementById("color-dropdown").addEventListener("change", function(e) {
+    color = e.target.value; 
+    uc();
+});
 uc();
 
 $("#root-switch").click(() => {
