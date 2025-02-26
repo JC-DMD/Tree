@@ -1,7 +1,7 @@
 # Tree
 *This visualizer is essentially a heavily personalized version of [Tree](https://github.com/generic-github-user/Tree), a project by [generic-github-user](https://github.com/generic-github-user).*
 
-`Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName) %T"} else {"$($_.FullName) %F"}} > output.txt`
+`Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName)?C"} else {"$($_.FullName)?I"}} > output.txt`
 
 A simple visualizer for file directory tree structures. Files and folders are visualized as a network, with files and the directories they belong to connected. This can be useful for quickly seeing the structure of all a project's files.
 
@@ -18,7 +18,7 @@ First, open up Windows PowerShell. On Windows, just press the Windows button in 
 
 Next, navigate to the directory you want to visualize with `cd C:\Your\Directory\Path`.
 
-Once you're in the correct directory, enter `Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName) %T"} else {"$($_.FullName) %F"}} > output.txt`. This will create a list the all the files and folders save it to a text file called `output.txt` in the directory you are visualizing.
+Once you're in the correct directory, enter `Get-ChildItem -Path . -Recurse | ForEach-Object {if ($_.PsIsContainer) {"$($_.FullName)?C"} else {"$($_.FullName)?I"}} > output.txt`. This will create a list the all the files and folders save it to a text file called `output.txt` in the directory you are visualizing.
 
 You can close the PowerShell now. Navigate to the directory in Windows Explorer or a similar program and open the text file.
 
