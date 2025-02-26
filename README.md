@@ -29,11 +29,7 @@ Once you have the list of file paths, just paste it (`CTRL + V`) into the text b
 
 ## Settings
 
-A number of settings are available to help customize the visualization.
-
-### Node color
-
-How to determine the color of each node represented.
+A number of settings are available to help customize the colors and nodes in the visualization.
 
 #### File Level
 
@@ -43,24 +39,10 @@ By default, nodes are colored by the level at which they fall within the file tr
 
 Alternatively, nodes nodes can be colored by what type of digital object they are. The root node (if it is shown) is one color, folders (sub-directories) are another color, and individual files are a different color.
 
-![Color nodes by object type](./3.PNG)
-
-
-
-![Color nodes by file level](./6.PNG)
-
 #### File Type
 
 Nodes are colored based on their file extension; every different extension corresponds to a different node color. Folders are colored differently from all files.
 
-![Color nodes by file type](./7.PNG)
-
 ### Show/hide root node
 
 By default, the file path data created by Windows does not include the root directory (the directory that was mapped). If the root node switch is enabled, Tree will automatically generate the root directory node.
-
-![Show root node enabled](./3.PNG)
-
-If it is not enabled, each sub-directory of the root directory will be displayed as the center of a separate network.
-
-![Show root node disabled](./2.PNG)
