@@ -24,6 +24,18 @@ textarea {
       padding: 1em;
       background-color: lightgrey;
       border: outset;
+      display: flex;
+      flex-direction: column;
+}
+
+a:link, a:visited {
+  background-color: #1d1e22;
+  color: white;
+  padding: 1em 1em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: auto;
 }
 
 #settings:hover {
