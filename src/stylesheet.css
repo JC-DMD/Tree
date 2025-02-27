@@ -65,10 +65,6 @@ a:link, a:visited {
       /* float: left; */
 }
 
-#node-color-header {
-      margin-bottom: 0;
-}
-
 #network {
       width: 100vw;
       height: 100vh;
