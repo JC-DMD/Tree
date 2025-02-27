@@ -6,7 +6,6 @@
 
 A simple visualizer for file directory tree structures. Files and folders are visualized as a network, with files and the directories they belong to connected. This can be useful for quickly seeing the structure of all a project's files.
 ![Example file visualization](/src/assets/1.png)
-![Example file visualization](./3.PNG)
 
 # Usage
 
