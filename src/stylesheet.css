@@ -13,6 +13,14 @@ body {
 textarea {
   width: 100%;
 }
+      
+button {
+      padding: .5em;
+      border: outset;
+      cursor: pointer;
+      width: auto;
+      margin:0.2em;
+}
 
 a:link, a:visited {
   color: white;
