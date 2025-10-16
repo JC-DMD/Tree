@@ -9,7 +9,7 @@ A simple visualizer for file directory tree structures. Files and folders are vi
 
 # Usage
 
-A demo of the program is available here: https://generic-github-user.github.io/Tree/src/. Before using the program, you will need to create a list of files in your chosen directory. Below are instructions to do so.
+Before using the program, you will need to create a list of files in your chosen directory. Below are instructions to do so.
 
 ## Generating a list of files
 
@@ -39,3 +39,7 @@ A number of settings are available to help customize the colors and nodes in the
 ### Show/hide root node
 
 By default, the file path data created by Windows does not include the root directory (the directory that was mapped). If the root node switch is enabled, Tree will automatically generate the root directory node.
+
+
+
+The original program is available here: https://generic-github-user.github.io/Tree/src/. 
